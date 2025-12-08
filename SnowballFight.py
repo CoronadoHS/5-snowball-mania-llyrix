@@ -8,7 +8,11 @@
 
 import random
 import time
+from colorama import init, Fore, Back, Style
 
+init()
+
+print(Fore.RED + "Hello World!")
 
 def printIntro():
     '''
@@ -18,6 +22,8 @@ def printIntro():
     ' 
     ' Return: none
     '''
+
+    #change colors here
     print("❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️")
     print("❄️  Welcome to Snowball Mania!❄️")
     print("❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️")
