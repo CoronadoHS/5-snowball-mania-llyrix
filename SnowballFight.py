@@ -12,7 +12,7 @@ from colorama import init, Fore, Back, Style
 
 init()
 
-print(Fore.RED + "Hello World!")
+print(Fore.RED + "Hello World!" + Style.RESET_ALL)
 
 def printIntro():
     '''
@@ -44,14 +44,14 @@ def getNames():
     ' 
     '''
     playerList = []
-    myName = input("What is your name? ")
+    myName = input(Fore.YELLOW + "What is your name?" + Style.RESET_ALL)
     playerList.append(myName)
-    print("Add other players (one at a time) by typing their names and hitting ENTER. Type DONE when finished. ")
+    print(Fore.GREEN + "Add other players (one at a time) by typing their names and hitting ENTER. Type DONE when finished. " + Style.RESET_ALL)
     nextName = input()
     while (nextName != "DONE"):
         playerList.append(nextName)
         nextName = input()
-    print("Great - time to play!")
+    print(Fore.CYAN + "Great - time to play!" + Style.RESET_ALL)
     return playerList
 
 def getThrower(players):
@@ -116,17 +116,30 @@ def playSnowballFight(players):
         thrower = getThrower(players)
         victim = getVictim(players, thrower)
         hitResult = getHitResult()
-        print (victim)
-        print (thrower)
+
+        survives1 = thrower + " throws at " + victim + " and hits, but " + Fore.GREEN + victim + " survives! " + Style.RESET_ALL
+        survives2 = thrower + " tries to hit " + victim + " ...and does! But the snowball bounces off and " + Fore.GREEN + victim + " survives!" + Style.RESET_ALL
+        surviveMessages = [survives1, survives2]
+
+        misses1 = thrower + " throws at " + victim + " but the thower slips on a banana... " + Fore.GREEN + victim + " survives! " + Style.RESET_ALL
+        misses2 = thrower + " tries to hit " + victim + " but the thower snowballs themself in the face... " + Fore.GREEN + victim + " survives!" + Style.RESET_ALL
+        missesMessages = [misses1, misses2]
+
+        KO1 = thrower + " throws at " + victim + " the victim get snowballed in the face... " + Fore.RED + victim + " is out of the game!" + Style.RESET_ALL
+        KO2 = thrower + " tries to hit " + victim + " the thrower misses but the victim slips on the snowball... " + Fore.RED + victim + " is out of the game!" + Style.RESET_ALL
+        KOMessages = [KO1, KO2]
 
         if (hitResult == True):
             koResult = random.randint(1,2) # 1 not KO, 2 = KO
             if (koResult == 1):
-                print(thrower + " throws at " + victim + " and hits, but " + victim + " survives!")
+                print(random.choice(surviveMessages))
+
             else: 
-                print(thrower + " throws and absolutely destroys " + victim + " - " + victim + " is out of the game! ")
+                print(random.choice(KOMessages))
+                print(thrower + " throws and absolutely destroys " + victim + " - " + victim + " is out of the game! ") #can I get rid of this line?
                 players.remove(victim)
         else:
+                print(random.choice(missesMessages))
                 print(thrower + " throws at " + victim + " but has really bad aim, misses. ")
         time.sleep(3)
     
